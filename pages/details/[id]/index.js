@@ -6,7 +6,7 @@ import { Button, Flex } from '@chakra-ui/core'
 import { useQuery } from '@apollo/react-hooks'
 import { GET_CHARACTER } from '../../../components/Query'
 import Layout from '../../../components/Layout'
-import { CharDetail } from '../../../components/CharDetails'
+import { CharDetail } from '../../../components/CharDetails/CharDetails'
 
 const Details = () => {
 	const router = useRouter()

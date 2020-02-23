@@ -1,4 +1,5 @@
 import { gql } from 'apollo-boost'
+
 export const GET_CHARACTERS = gql`
 	query getCharacters($filter: FilterCharacter, $page: Int) {
 		characters(filter: $filter, page: $page) {

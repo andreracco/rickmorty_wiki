@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { Box, Flex, IconButton, theme } from '@chakra-ui/core'
-
-import { useQuery, useLazyQuery } from '@apollo/react-hooks'
-
+import { Flex } from '@chakra-ui/core'
+import { useQuery } from '@apollo/react-hooks'
 import Layout from '../components/Layout'
 import { Loading } from '../components/Loading'
-import { SelectFilter } from '../components/SelectFilter'
-import { CharCard } from '../components/CharCard'
+import { SelectFilter } from '../components/SelectFilter/SelectFilter'
+import { CharCard } from '../components/ChardCard/CharCard'
 import { GET_CHARACTERS } from '../components/Query'
-import { Pagination } from '../components/Pagination'
+import { Pagination } from '../components/Pagination/Pagination'
 import { useRouter } from 'next/router'
 
-const Home = props => {
+const Home = () => {
 	const router = useRouter()
-	// const [pageNumber, setPageNumber] = useState(1)
 	const [dataFilter, setDataFilter] = useState({
 		gender: '',
 		status: '',
@@ -27,9 +24,7 @@ const Home = props => {
 	})
 
 	const goToPage = page => {
-		// setPageNumber(page)
-		router.push(`/?page=${page}`, `/${page}`)
-		// refetch()
+		router.push(`/?page=${page}`)
 	}
 
 	const SPECIES_LIST = [
@@ -49,7 +44,6 @@ const Home = props => {
 
 	const STATUS_LIST = ['Dead', 'Alive', 'unknown']
 	const GENDER_LIST = ['Female', 'Male', 'Genderless', 'unknown']
-
 
 	const onChangeSelect = (event, type) => {
 		setDataFilter({ ...dataFilter, [type]: event.target.value })
