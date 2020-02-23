@@ -19,7 +19,7 @@ const Home = () => {
 
 	const pageNumber = parseInt(router.query.page) || 1
 
-	const { loading, data, refetch } = useQuery(GET_CHARACTERS, {
+	const { loading, data } = useQuery(GET_CHARACTERS, {
 		variables: { filter: dataFilter, page: pageNumber }
 	})
 
