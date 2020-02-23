@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Box, Flex, IconButton } from '@chakra-ui/core'
+import { Box, Flex, IconButton, theme } from '@chakra-ui/core'
 
 import { useQuery, useLazyQuery } from '@apollo/react-hooks'
 
@@ -9,22 +9,27 @@ import { SelectFilter } from '../components/SelectFilter'
 import { CharCard } from '../components/CharCard'
 import { GET_CHARACTERS } from '../components/Query'
 import { Pagination } from '../components/Pagination'
+import { useRouter } from 'next/router'
 
 const Home = props => {
-	const [pageNumber, setPageNumber] = useState(1)
+	const router = useRouter()
+	// const [pageNumber, setPageNumber] = useState(1)
 	const [dataFilter, setDataFilter] = useState({
 		gender: '',
 		status: '',
 		species: ''
 	})
 
+	const pageNumber = parseInt(router.query.page) || 1
+
 	const { loading, data, refetch } = useQuery(GET_CHARACTERS, {
 		variables: { filter: dataFilter, page: pageNumber }
 	})
 
 	const goToPage = page => {
-		setPageNumber(page)
-		refetch()
+		// setPageNumber(page)
+		router.push(`/?page=${page}`, `/${page}`)
+		// refetch()
 	}
 
 	const SPECIES_LIST = [
@@ -52,6 +57,8 @@ const Home = props => {
 
 	return (
 		<Layout>
+			{console.log(router)}
+			{console.log(router)}
 			<Flex
 				align='center'
 				justify='space-between'

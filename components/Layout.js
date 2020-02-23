@@ -1,12 +1,12 @@
 import Head from 'next/head'
 import { ThemeProvider, CSSReset } from '@chakra-ui/core'
-import theme from '../common/style/theme'
+import customTheme from '../common/style/theme'
 import { Container } from './Container'
 import { Footer } from './Footer'
 import { Header } from './Header'
 
 const Layout = props => (
-	<ThemeProvider theme={theme}>
+	<ThemeProvider theme={customTheme}>
 		<CSSReset />
 		<Head>
 			<title>Rick and Morty Wiki</title>
