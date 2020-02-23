@@ -22,6 +22,5 @@ export const Footer = props => (
 		>
 			{props.children}
 		</Heading>
-
 	</Flex>
 )

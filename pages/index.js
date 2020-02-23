@@ -24,7 +24,7 @@ const Home = () => {
 	})
 
 	const goToPage = page => {
-		router.push(`/?page=${page}`)
+		router.push(`/?page=${page}`, `/${page}`)
 	}
 
 	const SPECIES_LIST = [
