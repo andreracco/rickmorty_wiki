@@ -11,6 +11,7 @@ import { useRouter } from 'next/router'
 
 const Home = () => {
 	const router = useRouter()
+	
 	const [dataFilter, setDataFilter] = useState({
 		gender: '',
 		status: '',
@@ -51,8 +52,6 @@ const Home = () => {
 
 	return (
 		<Layout>
-			{console.log(router)}
-			{console.log(router)}
 			<Flex
 				align='center'
 				justify='space-between'
