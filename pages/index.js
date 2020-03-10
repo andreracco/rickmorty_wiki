@@ -1,54 +1,37 @@
-import React, { useState, useEffect } from 'react'
-import { Flex } from '@chakra-ui/core'
-import { useQuery } from '@apollo/react-hooks'
-import Layout from '../components/Layout'
-import { Loading } from '../components/Loading'
-import { SelectFilter } from '../components/SelectFilter/SelectFilter'
-import { CharCard } from '../components/ChardCard/CharCard'
-import { GET_CHARACTERS } from '../components/Query'
-import { Pagination } from '../components/Pagination/Pagination'
-import { useRouter } from 'next/router'
+import React, { useState, useEffect } from 'react';
+import { Flex } from '@chakra-ui/core';
+import { useQuery } from '@apollo/react-hooks';
+import Layout from '../components/Layout';
+import { Loading } from '../components/Loading';
+import { SelectFilter } from '../components/SelectFilter/SelectFilter';
+import { CharCard } from '../components/ChardCard/CharCard';
+import { GET_CHARACTERS } from '../components/Query';
+import { Pagination } from '../components/Pagination/Pagination';
+import { useRouter } from 'next/router';
+import { GENDER_LIST, SPECIES_LIST, STATUS_LIST } from '../common/constants'
 
 const Home = () => {
-	const router = useRouter()
-	
+	const router = useRouter();
+
 	const [dataFilter, setDataFilter] = useState({
 		gender: '',
 		status: '',
 		species: ''
-	})
+	});
 
-	const pageNumber = parseInt(router.query.page) || 1
+	const pageNumber = parseInt(router.query.page) || 1;
 
 	const { loading, data } = useQuery(GET_CHARACTERS, {
 		variables: { filter: dataFilter, page: pageNumber }
-	})
+	});
 
 	const goToPage = page => {
-		router.push(`/?page=${page}`, `/${page}`)
-	}
-
-	const SPECIES_LIST = [
-		'Human',
-		'Alien',
-		'Mytholog',
-		'Animal',
-		'Robot',
-		'Disease',
-		'Humanoid',
-		'Parasite',
-		'unknown',
-		'Cronenberg',
-		'Poopybutthole',
-		'Vampire'
-	]
-
-	const STATUS_LIST = ['Dead', 'Alive', 'unknown']
-	const GENDER_LIST = ['Female', 'Male', 'Genderless', 'unknown']
+		router.push(`/?page=${page}`, `/${page}`);
+	};
 
 	const onChangeSelect = (event, type) => {
-		setDataFilter({ ...dataFilter, [type]: event.target.value })
-	}
+		setDataFilter({ ...dataFilter, [type]: event.target.value });
+	};
 
 	return (
 		<Layout>
@@ -118,7 +101,7 @@ const Home = () => {
 				)}
 			</Flex>
 		</Layout>
-	)
-}
+	);
+};
 
-export default Home
+export default Home;
