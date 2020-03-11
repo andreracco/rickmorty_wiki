@@ -4,7 +4,7 @@ export const styles = {
 		overflow: 'hidden',
 		margin: 5,
 		w: ['80%', '96%'],
-		h: ['auto', 500],
+		h: ['auto', 600],
 		boxShadow: '0 -12px 20px 0 #E2E8F0',
 		style: {
 			backgroundImage: `linear-gradient(to bottom, #ffffff30 50%, #F7FAFC 100%)`
@@ -13,7 +13,8 @@ export const styles = {
 
 	image: {
 		h: [322, '100%'],
-		w: ['100%', '40%']
+		w: ['100%', '50%'],
+		maxHeight: 550
 	},
 
 	title: {

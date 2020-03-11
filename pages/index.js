@@ -3,7 +3,7 @@ import { Flex } from '@chakra-ui/core';
 import { useQuery } from '@apollo/react-hooks';
 import Layout from '../components/Layout';
 import { Loading } from '../components/Loading';
-import { SelectFilter } from '../components/SelectFilter/SelectFilter';
+import { SelectFilter } from '../components/SelectFilter';
 import { CharCard } from '../components/ChardCard/CharCard';
 import { GET_CHARACTERS } from '../components/Query';
 import { Pagination } from '../components/Pagination/Pagination';

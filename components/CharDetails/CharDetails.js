@@ -21,7 +21,7 @@ export const CharDetail = ({ char }) => (
 					backgroundImage: `linear-gradient(to bottom, #ffffff30 60%, #F7FAFC 100%), url(${char.image})`
 				}}
 			/>
-			<Flex w={['90%', '56%']} direction='column' m='auto' my={2}>
+			<Flex w={['90%', '46%']} direction='column' m='auto' my={2}>
 				<Flex wrap='wrap' p={1}>
 					<Box {...styles.title} isTruncated color='gray.600'>
 						{char.name}{' '}
