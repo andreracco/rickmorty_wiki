@@ -1,18 +1,24 @@
-import React from 'react'
-import App from 'next/app'
-import { ApolloProvider } from '@apollo/react-hooks'
+import React from 'react';
+import App from 'next/app';
+import { ApolloProvider } from '@apollo/react-hooks';
 
-import withData from '../lib/apollo'
+import withData from '../lib/apollo';
+
+import {
+	CharacterProvider
+} from '../components/CharacterContext';
 
 class MyApp extends App {
 	render() {
-		const { Component, pageProps, apollo } = this.props
+		const { Component, pageProps, apollo } = this.props;
 		return (
 			<ApolloProvider client={apollo}>
-				<Component {...pageProps} />
+				<CharacterProvider>
+					<Component {...pageProps} />
+				</CharacterProvider>
 			</ApolloProvider>
-		)
+		);
 	}
 }
 
-export default withData(MyApp)
+export default withData(MyApp);

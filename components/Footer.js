@@ -11,9 +11,10 @@ export const Footer = props => (
 		width='100vw'
 	>
 		<Heading
-			size={['md', 'lg']}
+			size={['sm', 'md']}
 			mt={5}
 			fontWeight='medium'
+			fontSize={12}
 			rounded={8}
 			py={2}
 			px={5}

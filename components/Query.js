@@ -10,6 +10,15 @@ export const GET_CHARACTERS = gql`
 				status
 				gender
 				species
+				episode {
+					name
+					air_date
+				}
+				location {
+					name
+					type
+					dimension
+				}
 			}
 			info {
 				count
@@ -19,10 +28,10 @@ export const GET_CHARACTERS = gql`
 			}
 		}
 	}
-`
+`;
 
 export const GET_CHARACTER = gql`
-	query getCharacter($id: ID) {
+	query getCharacter($id: Int) {
 		character(id: $id) {
 			name
 			gender

@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Flex } from '@chakra-ui/core';
 import { useQuery } from '@apollo/react-hooks';
 import Layout from '../components/Layout';
 import { Loading } from '../components/Loading';
 import { SelectFilter } from '../components/SelectFilter';
 import { CharCard } from '../components/ChardCard/CharCard';
-import { GET_CHARACTERS } from '../components/Query';
 import { Pagination } from '../components/Pagination/Pagination';
 import { useRouter } from 'next/router';
-import { GENDER_LIST, SPECIES_LIST, STATUS_LIST } from '../common/constants'
+import { GENDER_LIST, SPECIES_LIST, STATUS_LIST } from '../common/constants';
+import { CharacterContext } from '../components/CharacterContext';
 
-const Home = () => {
+const Home = props => {
+	let { state, dispatch } = useContext(CharacterContext);
+
 	const router = useRouter();
 
 	const [dataFilter, setDataFilter] = useState({
@@ -21,17 +23,38 @@ const Home = () => {
 
 	const pageNumber = parseInt(router.query.page) || 1;
 
-	const { loading, data } = useQuery(GET_CHARACTERS, {
-		variables: { filter: dataFilter, page: pageNumber }
-	});
+	// const { loading, data } = useQuery(GET_CHARACTERS, {
+	// 	variables: { filter: dataFilter, page: pageNumber },
+	// 	onCompleted: () =>
+	// 		dispatch({
+	// 			type: 'LOADED'
+	// 		})
+	// });
 
 	const goToPage = page => {
+		dispatch({ type: 'IS_LOADING' });
 		router.push(`/?page=${page}`, `/${page}`);
+		pageChange(page);
 	};
 
 	const onChangeSelect = (event, type) => {
+		dispatch({ type: 'IS_LOADING' });
+		goToPage(1);
 		setDataFilter({ ...dataFilter, [type]: event.target.value });
+		filterData({ ...dataFilter, [type]: event.target.value });
 	};
+
+	const filterData = filter => dispatch({ type: 'FILTER', payload: filter });
+
+	const pageChange = page => dispatch({ type: 'GOTO_PAGE', payload: page });
+	// let dec = () => dispatch({ type: 'decrement' });
+	// let reset = () => dispatch({ type: 'reset' });
+	// let setColor = color => () =>
+	// 	dispatch({ type: 'set-color', payload: color });
+
+	// useEffect(() => {
+	// 	dispatch({ type: 'LOAD_DATA', payload: data && data.characters });
+	// }, [data]);
 
 	return (
 		<Layout>
@@ -68,12 +91,12 @@ const Home = () => {
 				mx='auto'
 				my={8}
 			>
-				{loading ? (
+				{state.isLoading ? (
 					<Loading />
 				) : (
-					data &&
-					data.characters.results &&
-					data.characters.results.map(char => (
+					state &&
+					state.characters &&
+					state.characters.map(char => (
 						<CharCard key={char.id} char={char} />
 					))
 				)}
@@ -86,16 +109,16 @@ const Home = () => {
 				wrap='wrap'
 				margin='auto'
 			>
-				{data && (
+				{state.info && (
 					<Pagination
 						previousButton={{
-							onClick: () => goToPage(data.characters.info.prev),
-							page: data.characters.info.prev
+							onClick: () => goToPage(state.info.prev),
+							page: state.info.prev
 						}}
 						pageNumber={pageNumber}
 						nextButton={{
-							onClick: () => goToPage(data.characters.info.next),
-							page: data.characters.info.next
+							onClick: () => goToPage(state.info.next),
+							page: state.info.next
 						}}
 					/>
 				)}
